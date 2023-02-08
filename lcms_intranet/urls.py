@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path
 
 from core.views import index
+from dashboard.views import index as dashboard_index
+from employees.views import index as employees_index
 
 urlpatterns = [
     path('', index, name="index"),
+    path('employees/', employees_index, name="employees"),
+    path('dashboard/', dashboard_index, name="dashboard"),
     path('admin/', admin.site.urls),
 ]

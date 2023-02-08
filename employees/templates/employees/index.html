@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-6 py-3 text-xl font-bold text-slate-200 bg-slate-500 text-center rounded-xl ">Gestion des employés</h1>
+    <div class="grid grid-cols-5 gap-3">
+        {% for employee in employees %}
+            {% if employee.category_employees.name == 'Chauffeur' %}
+                <p class="p-3 rounded-xl bg-green-400 text-white font-semibold">{{ employee.lastname }} {{ employee.firstname }}
+                <br/>Type : {{ employee.category_employees.name }}</p>
+            {% else %}
+                <p class="p-3 rounded-xl bg-blue-400 text-white font-semibold">{{ employee.lastname }} {{ employee.firstname }}
+                <br/>Type : {{ employee.category_employees.name }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

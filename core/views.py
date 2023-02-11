@@ -7,19 +7,15 @@ def index(request):
 
 
 def signup(request):
-    print("signup request")
     if request.method == 'POST':
-        print("POST request")
         form = SignupForm(request.POST)
         if form.is_valid():
-            print("form is valid")
             form.save()
             return redirect('/login/')
-        else:
-            print("form is INVALID")
-            print(form.errors.as_data())
+        # else:
+        #     print("form is INVALID")
+        #     print(form.errors.as_data())
     else:
-        print("GET Request")
         form = SignupForm()
 
     return render(request, 'core/signup.html', {

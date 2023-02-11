@@ -22,7 +22,8 @@ from employees.views import index as employees_index
 
 urlpatterns = [
     path('', include('core.urls')),
-    path('employees/', employees_index, name="employees"),
+    path('employees/', include('employees.urls')),
+    # path('employees/', employees_index, name="employees"),
     path('dashboard/', dashboard_index, name="dashboard"),
     path('admin/', admin.site.urls),
 ]

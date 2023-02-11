@@ -1,15 +1,14 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-Dashboard
+Tableau de bord
+{% endblock %}
+
+{% block title_head %}
+Tableau de bord
 {% endblock %}
 
 {% block content %}
-    <h1 class="mb-6 py-3 text-xl font-bold text-slate-200 bg-slate-500 text-center rounded-xl ">Tableau de bord</h1>
-    <div class="inline-flex space-x-6">
-        <a class="bg-blue-800 p-3 rounded-xl text-blue-100" href="{% url 'employees' %}">Gestion du personnel</a>
-        <a class="bg-blue-800 p-3 rounded-xl text-blue-100" href="#">Gestion du personnel</a>
-    </div>
     <div class="w-1/5 p-3 text-center bg-slate-500 rounded-t-xl">
         <h3 class="text-white font-semibold">Sélections médicales</h3>
     </div>

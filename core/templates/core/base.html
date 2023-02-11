@@ -4,17 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <title>{% block title %}{% endblock %} | LCMS Intranet</title>
 </head>
 <body class="bg-slate-800">
-    <nav class="py-3 px-3 flex justify-between items-center bg-slate-300 border-b border-slate-700">
-        <a href="/" class="text-xl font-semibold">LCMS Intranet</a>
-        <div class="space-x-6">
-            <a href="{% url 'index' %}" class="text-md font-semibold hover:text-gray-500">Accueil</a>
-            <a href="{% url 'dashboard' %}" class="text-md font-semibold hover:text-gray-500">Tableau de bord</a>
+    <nav class="relative container mx-auto">
+<!--        Flex container -->
+        <div class="p-3 flex justify-between items-center mx-auto bg-slate-300">
+<!--            logo -->
+            <div>
+                <a href="/" class="text-xl font-semibold">LCMS Intranet<br/>{% block title_head %}{% endblock %}</a>
+            </div>
+            <!-- MENU -->
+            <!-- Hide the menu for small screen and shows for bigger ones-->
+            <div class="hidden space-x-6 md:flex">
+                <a href="{% url 'core:index' %}" class="p-3 text-md font-semibold hover:bg-gray-500
+                border border-slate-400 rounded-lg ">Accueil</a>
+                <a href="{% url 'dashboard' %}" class="text-md font-semibold hover:text-gray-500">Tableau de bord</a>
+                <a href="{% url 'employees' %}" class="text-md font-semibold hover:text-gray-500">Personnel</a>
 
-            <a href="#" class="px-6 py-3 text-md font-semibold bg-slate-500 text-white rounded-xl hover:bg-slate-700">Connexion</a>
-
+                <a href="{% url 'core:signup' %}" class="px-6 py-3 text-md font-semibold bg-slate-500 text-white rounded-xl hover:bg-slate-700">Inscription</a>
+                <a href="#" class="px-6 py-3 text-md font-semibold bg-slate-500 text-white rounded-xl hover:bg-slate-700">Connexion</a>
+            </div>
+<!--            HAMBUEGER MENU -->
+            <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
+                <span class="hamburger-top"></span>
+                <span class="hamburger-middle"></span>
+                <span class="hamburger-bottom"></span>
+            </button>
+        </div>
+<!--        MOBILE MENU -->
+        <div class="md:hidden">
+            <div id="menu" class="absolute flex flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold-bg-white
+            sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+                <a href="#">Accueil</a>
+                <a href="#">Tableau de bord</a>
+                <a href="#">Personnel</a>
+            </div>
         </div>
     </nav>
     <div class="px-6 py-3 bg-slate-800">

@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+# from datetime import datetime
 
 class CategoryEmployees(models.Model):
     name = models.CharField(max_length=20, default='Administratif')
@@ -12,11 +14,13 @@ class CategoryEmployees(models.Model):
         return self.name
 
 class Employees(models.Model):
-    lastname = models.CharField(max_length=100, null=True, blank=True, default='Dupont')
-    firstname = models.CharField(max_length=25, null=True, blank=True, default='Dupont')
-    category_employees = models.ForeignKey(CategoryEmployees, related_name='category', on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, related_name='employees', on_delete=models.CASCADE)
-    # created_at = models.DateTimeField(auto_now_add=True)
+    lastname = models.CharField(max_length=100, verbose_name='Nom', null=True, blank=True, default='Dupont')
+    firstname = models.CharField(max_length=25, verbose_name='Prénom', null=True, blank=True, default='Dupont')
+    category_employees = models.ForeignKey(CategoryEmployees, verbose_name='Catégorie', related_name='category', on_delete=models.CASCADE)
+    starting_date = models.DateField(verbose_name="Date d'entrée")
+    ending_date = models.DateField(verbose_name="Date de fin")
+    created_by = models.ForeignKey(User, verbose_name='Créé par', related_name='employees', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(verbose_name='Créé le', auto_now_add=True)
 
     class Meta:
         ordering = ('lastname',)

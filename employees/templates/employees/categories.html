@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load categorytags %}
 {% block title %}
 Gestion des catérogies d'employés
 {% endblock %}
@@ -19,18 +19,20 @@ Gestion des catégories d'employés
 </nav>
 <div class="table w-full">
   <div class="table-header-group">
-    <div class="table-row">
-      <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Nom</div>
-      <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Modifier</div>
-      <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Désactiver</div>
+    <div class="table-row text-center">
+      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Nom</div>
+      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100"># Employés</div>
+      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Modifier</div>
+      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Supprimer<br></div>
     </div>
   </div>
   <div class="table-row-group ">
     {% for category in categories %}
       <div class="table-row bg-slate-600 hover:bg-slate-500">
         <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ category.name }}</div>
+        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700">{{ employees|countEmployeesInCategory:category.id }}</div>
         <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700"><a href="#"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
-        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700 "><a href="#"><i class="bi-slash-circle text-red-400" style="font-size: 24px;"></i></a></div>
+        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700 "><a href="#"><i class="bi-trash text-red-400" style="font-size: 24px;"></i></a></div>
       </div>
     {% endfor %}
     </div>

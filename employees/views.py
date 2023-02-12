@@ -15,8 +15,10 @@ def index(request):
 def categories(request):
     """" Get all the categories from the DB """
     categories = CategoryEmployees.objects.all()
+    employees = Employees.objects.all()
     return render(request, 'employees/categories.html', {
-        'categories': categories
+        'categories': categories,
+        'employees': employees,
     })
 
 @login_required

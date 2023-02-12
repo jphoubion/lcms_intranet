@@ -4,7 +4,8 @@ from django.utils import timezone
 # from datetime import datetime
 
 class CategoryEmployees(models.Model):
-    name = models.CharField(max_length=20, default='Administratif')
+    name = models.CharField(max_length=20, default='Administratif', unique=True)
+    # employees = models.ManyToOneRel()
 
     class Meta:
         ordering = ('name',)

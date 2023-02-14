@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load categorytags %}
+{% block title %}
+Création d'un employé
+{% endblock %}
+
+{% block title_head %}
+Création d'un employé
+{% endblock %}
+
+{% block content %}
+<div class="w-1/2 my-6 p-6 text-center mx-auto bg-slate-200 rounded-xl">
+  <h1 class="mb-6 text-3xl text-slate-700">Création d'un employé</h1>
+  <form method="post" action=" {% url 'employees:new_employee' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="inline-block mb-2">Nom</label><br>
+      {{ form.lastname }}
+    </div>
+    <div class="mb-3">
+      <label class="inline-block mb-2">Prénom</label><br>
+      {{ form.firstname }}
+    </div>
+        <div class="mb-3">
+      <label class="inline-block mb-2">Société</label><br>
+      {{ form.company }}
+    </div>
+        <div class="mb-3">
+      <label class="inline-block mb-2">Catégorie</label><br>
+      {{ form.category_employees }}
+    </div>
+        <div class="mb-3">
+      <label class="inline-block mb-2">Date début</label><br>
+      {{ form.starting_date }}
+    </div>
+        <div class="mb-3">
+      <label class="inline-block mb-2">Date fin</label><br>
+      {{ form.ending_date }}
+    </div>
+        <div class="mb-3">
+      <label class="inline-block mb-2">Créé par</label><br>
+      {{ form.created_by }}
+    </div>
+        <div class="mb-3">
+      <label class="inline-block mb-2">Créé le</label><br>
+      {{ form.created_at }}
+    </div>
+
+    {% if form.errors or form.non_field_error %}
+      <div class="mb-3 6 bg-red-100 rounded-xl">
+        {% for field in form %}
+          {{ field.errors }}
+        {% endfor %}
+
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+    <button class="py-4 px-8 text-lg bg-slate-500 hover:bg-slate-600 rounded-xl text-white" type="submit">Enregistrer</button>
+  </form>
+</div>
+{% endblock %}

@@ -3,6 +3,14 @@ from django.db import models
 from django.utils import timezone
 # from datetime import datetime
 
+
+class Companies(models.Model):
+    name = models.CharField(max_length=40, verbose_name="Nom")
+    type = models.CharField(max_length=10, verbose_name="Forme juridique")
+
+    def __str__(self):
+        return f"{self.name} {self.type}"
+
 class CategoryEmployees(models.Model):
     name = models.CharField(max_length=20, default='Administratif', unique=True)
     # employees = models.ManyToOneRel()
@@ -17,6 +25,7 @@ class CategoryEmployees(models.Model):
 class Employees(models.Model):
     lastname = models.CharField(max_length=100, verbose_name='Nom', null=True, blank=True, default='Dupont')
     firstname = models.CharField(max_length=25, verbose_name='Prénom', null=True, blank=True, default='Dupont')
+    company = models.ForeignKey(Companies, verbose_name="Société", related_name="company", on_delete=models.CASCADE)
     category_employees = models.ForeignKey(CategoryEmployees, verbose_name='Catégorie', related_name='category', on_delete=models.CASCADE)
     starting_date = models.DateField(verbose_name="Date d'entrée")
     ending_date = models.DateField(verbose_name="Date de fin")

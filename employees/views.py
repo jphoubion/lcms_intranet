@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from employees.models import Employees, CategoryEmployees
-from .forms import NewCategoryEmployeesForm
+from .forms import NewCategoryEmployeesForm, NewEmployeeForm
 
 def index(request):
     employees = Employees.objects.all()
@@ -40,5 +40,31 @@ def newCategory(request):
         form = NewCategoryEmployeesForm()
 
     return render(request, 'employees/category_form.html', {
+        'form': form,
+    })
+
+@login_required
+def employees(request):
+    employees = Employees.objects.all()
+    return render(request, 'employees/employees.html', {
+        'employees': employees,
+    })
+
+def newEmployee(request):
+    form = NewEmployeeForm()
+
+    if request.method == "POST":
+        form = NewEmployeeForm(request.POST)
+        if form.is_valid():
+            print("from valid")
+            form.save()
+            return redirect('/employees/employees')
+        else:
+            print("form is INVALID")
+            print(form.errors.as_data())
+    else:
+        form = NewEmployeeForm()
+
+    return render(request, 'employees/employee_form.html', {
         'form': form,
     })

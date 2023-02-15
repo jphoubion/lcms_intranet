@@ -37,9 +37,11 @@ Création d'un employé
       <label class="inline-block mb-2">Date fin</label><br>
       {{ form.ending_date }}
     </div>
-        <div class="mb-3">
+    <div class="mb-3">
       <label class="inline-block mb-2">Créé par</label><br>
-      {{ form.created_by }}
+        {% if request.user.is_authenticated %}
+          {{ form.created_by }} {{ request.user }}
+        {% endif %}
     </div>
         <div class="mb-3">
       <label class="inline-block mb-2">Créé le</label><br>

@@ -50,6 +50,11 @@ def employees(request):
         'employees': employees,
     })
 
+def get_user_id(request):
+    current_user = request.user
+    print(current_user.id)
+    return current_user
+
 def newEmployee(request):
     form = NewEmployeeForm()
 
@@ -67,4 +72,5 @@ def newEmployee(request):
 
     return render(request, 'employees/employee_form.html', {
         'form': form,
+    
     })

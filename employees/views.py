@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -56,19 +58,27 @@ def get_user_id(request):
     return current_user
 
 def newEmployee(request):
-    form = NewEmployeeForm()
+    print(request.user.id)
+    print(datetime.date.today())
+    form = NewEmployeeForm(initial={'created_by': request.user,
+                                    'created_at': datetime.date.today()})
 
     if request.method == "POST":
         form = NewEmployeeForm(request.POST)
         if form.is_valid():
             print("from valid")
+            form.clean()
+            print(form.cleaned_data)
+            form.save(commit=False)
+            form.created_by = request.user.id
             form.save()
             return redirect('/employees/employees')
         else:
             print("form is INVALID")
             print(form.errors.as_data())
     else:
-        form = NewEmployeeForm()
+        form = NewEmployeeForm(initial={'created_by': request.user,
+                                    'created_at': datetime.date.today()})
 
     return render(request, 'employees/employee_form.html', {
         'form': form,

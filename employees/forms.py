@@ -29,13 +29,15 @@ class NewEmployeeForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Companies.objects.all(), empty_label="Choisissez une société")
     category_employees = forms.ModelChoiceField(queryset=CategoryEmployees.objects.all(),
                                                 empty_label="Choisissez une catégorie d'employé",)
-    starting_date = forms.DateField(widget=forms.DateInput(attrs={
+    starting_date = forms.DateField(required=False, widget=forms.DateInput(attrs={
         'placeholder': "Date de début",
         'class': 'w-full py-4 px-6 rounded-xl'}))
-    ending_date = forms.DateField(widget=forms.DateInput(attrs={
+    ending_date = forms.DateField(required=False, widget=forms.DateInput(attrs={
         'placeholder': "Date de fin",
         'class': 'w-full py-4 px-6 rounded-xl'}))
-    created_by = forms.CharField()
+    created_by = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': "Créé par",
+        'class': 'w-full py-4 px-6 rounded-xl'}))
     created_at = forms.DateTimeField(initial=datetime.date.today(), widget=forms.DateTimeInput(attrs={
         'placeholder': "Créé le",
         'class': 'w-full py-4 px-6 rounded-xl'}))

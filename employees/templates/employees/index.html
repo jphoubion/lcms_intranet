@@ -25,6 +25,8 @@ Gestion du personnel
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Fonction</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">A débuté</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">A quitté</div>
+      <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Créé par</div>
+      <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Créé le</div>
       <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Modifier</div>
       <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Désactiver</div>
     </div>
@@ -36,6 +38,8 @@ Gestion du personnel
         <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.category_employees.name }}</div>
         <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.starting_date|date:'d/m/Y' }}</div>
         <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.ending_date|date:'d/m/Y' }}</div>
+        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.created_by.username }}</div>
+        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.created_at|date:'d/m/Y' }}</div>
         <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700"><a href="#"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
         <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700 "><a href="#"><i class="bi-slash-circle text-red-400" style="font-size: 24px;"></i></a></div>
       </div>

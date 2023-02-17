@@ -1,9 +1,9 @@
 import datetime
-
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from employees.models import Employees, CategoryEmployees
+from employees.models import Employees, CategoryEmployees, Companies
 from .forms import NewCategoryEmployeesForm, NewEmployeeForm
 
 def index(request):
@@ -67,12 +67,12 @@ def newEmployee(request):
         form = NewEmployeeForm(request.POST)
         if form.is_valid():
             print("from valid")
-            form.clean()
-            print(form.cleaned_data)
-            form.save(commit=False)
-            form.created_by = request.user.id
-            form.save()
-            return redirect('/employees/employees')
+            # form.save(commit=False)
+            form_cleaned = form.cleaned_data
+            form_cleaned['created_by'] = request.user
+            # form.save()
+            Employees.objects.create(**form_cleaned)
+            return redirect('/employees')
         else:
             print("form is INVALID")
             print(form.errors.as_data())

@@ -1,4 +1,6 @@
 import datetime
+
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -54,33 +56,56 @@ def employees(request):
 
 def get_user_id(request):
     current_user = request.user
-    print(current_user.id)
     return current_user
 
+@login_required
 def newEmployee(request):
-    print(request.user.id)
-    print(datetime.date.today())
-    form = NewEmployeeForm(initial={'created_by': request.user,
-                                    'created_at': datetime.date.today()})
+    # form = NewEmployeeForm(initial={'created_by': request.user, 'created_at': datetime.date.today()})
 
     if request.method == "POST":
-        form = NewEmployeeForm(request.POST)
+        form = NewEmployeeForm(request.POST, request.FILES)
         if form.is_valid():
-            print("from valid")
-            # form.save(commit=False)
             form_cleaned = form.cleaned_data
             form_cleaned['created_by'] = request.user
-            # form.save()
             Employees.objects.create(**form_cleaned)
             return redirect('/employees')
         else:
             print("form is INVALID")
+            print(request.FILES)
             print(form.errors.as_data())
     else:
         form = NewEmployeeForm(initial={'created_by': request.user,
                                     'created_at': datetime.date.today()})
 
     return render(request, 'employees/employee_form.html', {
-        'form': form,
-    
-    })
+        'form': form,})
+
+@login_required
+def editEmployee(request, pk):
+    employee = Employees.objects.get(pk=pk)
+    creator = User.objects.get(id=employee.created_by.id)
+    form = NewEmployeeForm(request.POST or None, request.FILES or None,
+                           instance=employee,
+                           initial={'created_by': creator})
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('/employees')
+        else:
+            print("form is INVALID")
+            print(request.FILES)
+            print(form.errors.as_data())
+    return render(request, 'employees/employee_form.html', {
+        'employee': employee,
+        'form': form, })
+
+@login_required
+def deleteEmployee(request, pk):
+    employee = Employees.objects.get(pk=pk)
+
+    if request.method == "POST":
+        employee.delete()
+        return redirect('/employees')
+    return render(request, 'employees/delete_employee_form.html', {
+        'employee': employee, })

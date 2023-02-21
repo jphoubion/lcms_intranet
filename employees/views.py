@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from employees.models import Employees, CategoryEmployees, Companies
 from .forms import NewCategoryEmployeesForm, NewEmployeeForm
 
+@login_required
 def index(request):
     employees = Employees.objects.all()
     category_employee = CategoryEmployees.objects.all()
@@ -25,12 +26,10 @@ def categories(request):
         'employees': employees,
     })
 
-@login_required
+
 def newCategory(request):
     """ Form to create a new category of employees """
-
     form = NewCategoryEmployeesForm()
-
     if request.method == "POST":
         form = NewCategoryEmployeesForm(request.POST)
         if form.is_valid():
@@ -44,24 +43,46 @@ def newCategory(request):
         form = NewCategoryEmployeesForm()
 
     return render(request, 'employees/category_form.html', {
-        'form': form,
-    })
+        'form': form,})
 
-@login_required
+def editCategory(request, pk):
+    category = CategoryEmployees.objects.get(pk=pk)
+    print(category, category.id )
+    form = NewCategoryEmployeesForm(request.POST or None, instance=category)
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('/employees/categories')
+        else:
+            print("form is INVALID")
+            print(form.errors.as_data())
+
+    return render(request, 'employees/category_form.html', {
+        'category': category,
+        'form': form, })
+
+def deleteCategory(request, pk):
+    category = CategoryEmployees.objects.get(pk=pk)
+
+    if request.method == "POST":
+        category.delete()
+        return redirect('/employees/categories')
+    return render(request, 'employees/delete_category_form.html', {
+        'category': category, })
+
 def employees(request):
     employees = Employees.objects.all()
     return render(request, 'employees/employees.html', {
         'employees': employees,
     })
 
-def get_user_id(request):
-    current_user = request.user
-    return current_user
+# def get_user_id(request):
+#     current_user = request.user
+#     return current_user
 
-@login_required
+
 def newEmployee(request):
-    # form = NewEmployeeForm(initial={'created_by': request.user, 'created_at': datetime.date.today()})
-
     if request.method == "POST":
         form = NewEmployeeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -80,12 +101,11 @@ def newEmployee(request):
     return render(request, 'employees/employee_form.html', {
         'form': form,})
 
-@login_required
+
 def editEmployee(request, pk):
     employee = Employees.objects.get(pk=pk)
     creator = User.objects.get(id=employee.created_by.id)
-    form = NewEmployeeForm(request.POST or None, request.FILES or None,
-                           instance=employee,
+    form = NewEmployeeForm(request.POST or None, request.FILES or None, instance=employee,
                            initial={'created_by': creator})
 
     if request.method == "POST":
@@ -100,7 +120,7 @@ def editEmployee(request, pk):
         'employee': employee,
         'form': form, })
 
-@login_required
+
 def deleteEmployee(request, pk):
     employee = Employees.objects.get(pk=pk)
 

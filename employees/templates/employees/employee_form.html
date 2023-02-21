@@ -9,8 +9,8 @@ Création d'un employé
 {% endblock %}
 
 {% block content %}
-<div class="my-6 p-6 text-center mx-auto bg-slate-200 rounded-xl">
-  <h1 class="mb-6 text-3xl text-slate-700">Création d'un employé</h1>
+<div class="w-full md:w-4/5 my-6 p-6 text-center mx-auto bg-slate-700 text-slate-100 rounded-xl">
+  <h1 class="mb-6 text-3xl">Création d'un employé</h1>
   {% if employee %}
     <form method="POST" action="{% url 'employees:edit_employee' employee.id %}" enctype="multipart/form-data">
   {% else %}
@@ -72,8 +72,8 @@ Création d'un employé
         {{ form.non_field_errors }}
       </div>
       {% endif %}
-      <button class="py-4 px-8 text-lg bg-slate-500 hover:bg-slate-600 rounded-xl text-white" type="submit">Enregistrer</button>
-      <a href="{% url 'employees:index' %}" class="py-4 px-8 text-lg bg-slate-500 hover:bg-slate-600 rounded-xl text-white">Annuler</a>
+      <button class="py-4 px-8 text-lg bg-green-500 hover:bg-green-600 rounded-xl text-white" type="submit">Enregistrer</button>
+      <a href="{% url 'employees:index' %}" class="py-4 px-8 text-lg bg-red-500 hover:bg-red-600 rounded-xl text-white">Annuler</a>
     </div>
   </form>
 </div>

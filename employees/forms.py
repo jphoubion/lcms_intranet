@@ -29,6 +29,7 @@ class NewEmployeeForm(forms.ModelForm):
                                      widget=forms.Select(attrs={'placeholder': "Choisissez une société", 'class': 'w-full py-4 px-6 rounded-xl bg-slate-500 text-slate-100'}))
     category_employees = forms.ModelChoiceField(queryset=CategoryEmployees.objects.all(), empty_label="Choisissez une catégorie d'employé",
                                              widget=forms.Select(attrs={'placeholder': "Choisissez une catégorie", 'class': 'w-full py-4 px-6 rounded-xl bg-slate-500 text-slate-100'}))
+    has_selection_medical = forms.CheckboxInput()
     starting_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'placeholder': "Date de début",'class': 'w-full py-4 px-6 rounded-xl bg-slate-500 text-slate-100'}))
     ending_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'placeholder': "Date de fin",'class': 'w-full py-4 px-6 rounded-xl bg-slate-500 text-slate-100'}))
     created_by = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Créé par",'class': 'w-full py-4 px-6 rounded-xl bg-slate-500 text-slate-100'}))

@@ -11,9 +11,9 @@ Gestion du personnel
 
 {% block content %}
 <nav class="mb-3">
-  <div class="flex flex-row w-full space-x-3">
-    <a href="{% url 'employees:categories' %}" class="p-3 bg-slate-200 hover:bg-slate-300">Gérer les catégories d'employés</a>
-    <a href="{% url 'employees:new_employee' %}" class="p-3 bg-slate-200 hover:bg-slate-300">Ajouter un employé</a>
+  <div class="flex flex-row w-full space-x-3 text-slate-100">
+    <a href="{% url 'employees:categories' %}" class="p-3 bg-slate-200 hover:bg-slate-300 text-slate-800">Gérer les catégories d'employés</a>
+    <a href="{% url 'employees:new_employee' %}" class="p-3 bg-slate-200 hover:bg-slate-300  text-slate-800">Ajouter un employé</a>
 <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 2</a>-->
 <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 3</a>-->
 <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 4</a>-->
@@ -35,16 +35,16 @@ Gestion du personnel
   </div>
   <div class="table-row-group ">
     {% for employee in employees %}
-      <div class="table-row bg-slate-600 hover:bg-slate-500">
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700"><B>{{ employee.lastname }}</B> {{ employee.firstname }}</div>
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700"><img class="rounded-full w-16 h-16" src={{ employee.picture.url }}></div>
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.category_employees.name }}</div>
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.starting_date|date:'d/m/Y' }}</div>
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.ending_date|date:'d/m/Y' }}</div>
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.created_by.username }}</div>
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ employee.created_at|date:'d/m/Y' }}</div>
-        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700"><a href="{% url 'employees:edit_employee' employee.id %}"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
-        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700 "><a href="{% url 'employees:delete_employee' employee.id %}"><i class="bi-slash-circle text-red-400" style="font-size: 24px;"></i></a></div>
+      <div class="table-row bg-slate-600 hover:bg-slate-500 ">
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700"><B>{{ employee.lastname }}</B> {{ employee.firstname }}</div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700"><img class="rounded-full w-16 h-16" src={{ employee.picture.url }}></div>
+        <div class="table-cell p-3 align-middle text-slate-100 hover:text-slate-700 text-left border-b border-slate-700"><a href="{% url 'employees:employees_filtered' employee.category_employees.id %}"> {{ employee.category_employees.name }}</a></div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.starting_date|date:'d/m/Y' }}</div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.ending_date|date:'d/m/Y' }}</div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.created_by.username }}</div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.created_at|date:'d/m/Y' }}</div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700"><a href="{% url 'employees:edit_employee' employee.id %}"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700 "><a href="{% url 'employees:delete_employee' employee.id %}"><i class="bi-slash-circle text-red-400" style="font-size: 24px;"></i></a></div>
       </div>
     {% endfor %}
     </div>

@@ -71,9 +71,13 @@ def deleteCategory(request, pk):
     return render(request, 'employees/delete_category_form.html', {
         'category': category, })
 
-def employees(request):
-    employees = Employees.objects.all()
-    return render(request, 'employees/employees.html', {
+def employees(request, pk_category):
+    if pk_category is None:
+        employees = Employees.objects.all()
+    else:
+        employees = Employees.objects.filter(category_employees_id=pk_category)
+
+    return render(request, 'employees/index.html', {
         'employees': employees,
     })
 

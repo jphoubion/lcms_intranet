@@ -30,6 +30,7 @@ class Employees(models.Model):
     category_employees = models.ForeignKey(CategoryEmployees, verbose_name='Catégorie', related_name='category', on_delete=models.CASCADE)
     starting_date = models.DateField(verbose_name="Date d'entrée", null=True, blank=True)
     ending_date = models.DateField(verbose_name="Date de fin", null=True, blank=True)
+    has_selection_medical = models.BooleanField(verbose_name="Sélect. médic.", default=False, blank=False)
     picture = models.ImageField(upload_to='employees_pictures', verbose_name="Photo", blank=True, null=True)
     created_by = models.ForeignKey(User, verbose_name='Créé par', related_name='employees', on_delete=models.CASCADE)
     created_at = models.DateTimeField(verbose_name='Créé le', auto_now_add=True)

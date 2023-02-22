@@ -9,7 +9,7 @@ Suppression d'une catégorie
 {% endblock %}
 
 {% block content %}
-<div class="w-1/2 p-6 text-center mx-auto bg-slate-200 rounded-xl">
+<div class="w-1/2 p-6 text-center mx-auto bg-slate-200 ">
   <h1 class="mb-6 text-3xl text-slate-700">Suppression d'une catégorie - Confirmation</h1>
     <form method="POST" action="{% url 'employees:delete_category' category.id %}">
     {% csrf_token %}
@@ -19,7 +19,7 @@ Suppression d'une catégorie
       </div>
 
       {% if form.errors or form.non_field_error %}
-      <div class="mb-3 6 bg-red-100 rounded-xl">
+      <div class="mb-3 6 bg-red-100 ">
         {% for field in form %}
         {{ field.errors }}
         {% endfor %}
@@ -30,8 +30,8 @@ Suppression d'une catégorie
       <div class="col-span-2">
         <H1 class="p-3 text-2xl ">Êtes-vous certain de vouloir supprimer cette catégorie ?</H1>
       </div>
-      <button class="py-4 px-8 text-lg bg-red-500 hover:bg-slate-300 rounded-xl text-white" type="submit">Oui</button>
-      <a href="{% url 'employees:categories' %}" class="py-4 px-8 text-lg bg-green-500 hover:bg-green-300 rounded-xl text-white">Non</a>
+      <button class="py-4 px-8 text-lg bg-red-500 hover:bg-slate-300  text-white" type="submit">Oui</button>
+      <a href="{% url 'employees:categories' %}" class="py-4 px-8 text-lg bg-green-500 hover:bg-green-300  text-white">Non</a>
     </div>
   </form>
 </div>

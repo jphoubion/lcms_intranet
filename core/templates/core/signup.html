@@ -3,7 +3,7 @@
 {% block title %}Inscription{% endblock %}
 
 {% block content %}
-<div class="w-1/2 my-6 p-6 text-center mx-auto bg-slate-200 rounded-xl">
+<div class="w-1/2 my-6 p-6 text-center mx-auto bg-slate-200 ">
   <h1 class="mb-6 text-3xl text-slate-700">Inscription</h1>
   <form method="post" action="{% url 'core:signup' %}">
     {% csrf_token %}
@@ -25,7 +25,7 @@
     </div>
 
     {% if form.errors or form.non_field_error %}
-      <div class="mb-3 6 bg-red-100 rounded-xl">
+      <div class="mb-3 6 bg-red-100 ">
         {% for field in form %}
           {{ field.errors }}
         {% endfor %}
@@ -33,7 +33,7 @@
         {{ form.non_field_errors }}
       </div>
     {% endif %}
-    <button class="py-4 px-8 text-lg bg-slate-500 hover:bg-slate-600 rounded-xl text-white" type="submit">Enregistrer</button>
+    <button class="py-4 px-8 text-lg bg-slate-500 hover:bg-slate-600  text-white" type="submit">Enregistrer</button>
   </form>
 
 </div>

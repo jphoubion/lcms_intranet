@@ -9,7 +9,7 @@ Création d'un catégorie d'employé
 {% endblock %}
 
 {% block content %}
-<div class="w-full md:w-4/5 my-6 p-6 text-center mx-auto bg-slate-700 text-slate-100 rounded-xl">
+<div class="w-full md:w-4/5 my-6 p-6 text-center mx-auto bg-slate-700 text-slate-100 ">
   <h1 class="mb-6 text-3xl">Création d'une catégorie</h1>
   {% if category %}
     <form method="post" action=" {% url 'employees:edit_category' category.id %}">
@@ -23,7 +23,7 @@ Création d'un catégorie d'employé
     </div>
 
     {% if form.errors or form.non_field_error %}
-      <div class="mb-3 6 bg-red-100 rounded-xl">
+      <div class="mb-3 6 bg-red-100 ">
         {% for field in form %}
           {{ field.errors }}
         {% endfor %}
@@ -32,8 +32,8 @@ Création d'un catégorie d'employé
       </div>
     {% endif %}
     <div class="space-x-3">
-      <button class="py-4 px-8 text-lg bg-green-500 hover:bg-green-600 rounded-xl text-white ring-green-400" type="submit">Enregistrer</button>
-      <a href="{% url 'employees:categories' %}" class="py-4 px-8 text-lg bg-red-500 hover:bg-red-600 rounded-xl text-white" type="submit">Annuler</a>
+      <button class="py-4 px-8 text-lg bg-green-500 hover:bg-green-600  text-white ring-green-400" type="submit">Enregistrer</button>
+      <a href="{% url 'employees:categories' %}" class="py-4 px-8 text-lg bg-red-500 hover:bg-red-600  text-white" type="submit">Annuler</a>
     </div>
   </form>
 </div>

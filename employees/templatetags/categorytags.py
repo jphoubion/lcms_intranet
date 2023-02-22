@@ -4,5 +4,4 @@ register = template.Library()
 
 @register.filter
 def countEmployeesInCategory(employees, category):
-    print(employees, category)
     return employees.filter(category_employees=category).count()

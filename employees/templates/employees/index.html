@@ -25,6 +25,7 @@ Gestion du personnel
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Nom</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Photo</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Fonction</div>
+      <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Sél. méd.</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">A débuté</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">A quitté</div>
       <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Créé par</div>
@@ -36,9 +37,15 @@ Gestion du personnel
   <div class="table-row-group ">
     {% for employee in employees %}
       <div class="table-row bg-slate-600 hover:bg-slate-500 ">
-        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700"><B>{{ employee.lastname }}</B> {{ employee.firstname }}</div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700"><B>{{ employee.lastname }}</B><br> {{ employee.firstname }}</div>
         <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700"><img class="rounded-full w-16 h-16" src={{ employee.picture.url }}></div>
         <div class="table-cell p-3 align-middle text-slate-100 hover:text-slate-700 text-left border-b border-slate-700"><a href="{% url 'employees:employees_filtered' employee.category_employees.id %}"> {{ employee.category_employees.name }}</a></div>
+        <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700">
+          {% if employee.has_selection_medical %}
+            <a href="#"><i class="bi-eye text-green-400 mr-3" style="font-size: 24px;"></i></a>
+          {% endif %}
+          {{ employee.selection_medical_start|date:'d/m/Y' }}
+        </div>
         <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.starting_date|date:'d/m/Y' }}</div>
         <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.ending_date|date:'d/m/Y' }}</div>
         <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.created_by.username }}</div>

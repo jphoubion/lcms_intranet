@@ -1,6 +1,5 @@
 import datetime
 
-from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -8,8 +7,11 @@ from django.contrib.auth.decorators import login_required
 from employees.models import Employees, CategoryEmployees, Companies
 from .forms import NewCategoryEmployeesForm, NewEmployeeForm
 
+
 @login_required
 def index(request):
+    """ Displays each emloyee and its category """
+
     employees = Employees.objects.all()
     category_employee = CategoryEmployees.objects.all()
     return render(request, 'employees/index.html', {
@@ -19,6 +21,7 @@ def index(request):
 
 def categories(request):
     """" Get all the categories from the DB """
+
     categories = CategoryEmployees.objects.all()
     employees = Employees.objects.all()
     return render(request, 'employees/categories.html', {
@@ -28,7 +31,8 @@ def categories(request):
 
 
 def newCategory(request):
-    """ Form to create a new category of employees """
+    """ View to create a new category of employees """
+
     form = NewCategoryEmployeesForm()
     if request.method == "POST":
         form = NewCategoryEmployeesForm(request.POST)

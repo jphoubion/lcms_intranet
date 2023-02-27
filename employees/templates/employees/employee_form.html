@@ -18,63 +18,68 @@ Création d'un employé
   {% endif %}
 
     {% csrf_token %}
+
       <div>
         <table class="table-fixed bg-slate-600 w-4/5 mx-auto">
           <tbody>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Photo</label></td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Photo</label></td>
               <td class="w-4/5">
                 {% if employee %}
-                  <img class="mx-auto m-3 w-32 h-32" src={{ employee.picture.url }}>
+                  {% if employee.picture %}
+                    <img class="mx-auto m-3 w-32 h-32" src={{ employee.picture.url }}>
+                  {% else %}
+                    <i class="bi-slash-circle text-red-400" style="font-size: 32px;"></i>
+                  {% endif %}
                 {% else %}
                   {{ form.picture }}
                 {% endif %}
               </td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Nom</label></td>
-              <td class="w-4/5 pr-3">{{ form.lastname }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Nom</label></td>
+              <td class="w-4/5 pr-6">{{ form.lastname }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Prénom</label></td>
-              <td class="w-4/5 pr-3">{{ form.firstname }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Prénom</label></td>
+              <td class="w-4/5 pr-6">{{ form.firstname }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Société</label></td>
-              <td class="w-4/5 pr-3">{{ form.company }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Société</label></td>
+              <td class="w-4/5 pr-6">{{ form.company }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Catégorie</label></td>
-              <td class="w-4/5 pr-3">{{ form.category_employees }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Catégorie</label></td>
+              <td class="w-4/5 pr-6">{{ form.category_employees }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Sélect. médic.</label></td>
-              <td class="w-4/5 pr-3">{{ form.has_selection_medical }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Sélect. médic.</label></td>
+              <td class="w-4/5 pr-6">{{ form.has_selection_medical }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Début Sel. Med.</label></td>
-              <td class="w-4/5 pr-3">{{ form.selection_medical_start }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Début Sel. Med.</label></td>
+              <td class="w-4/5 pr-6">{{ form.selection_medical_start }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Fin sel. med.</label></td>
-              <td class="w-4/5 pr-3">{{ form.selection_medical_end }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Fin sel. med.</label></td>
+              <td class="w-4/5 pr-6">{{ form.selection_medical_end }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Rappel sel. med.</label></td>
-              <td class="w-4/5 pr-3">{{ form.selection_medical_remind_date }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Rappel sel. med.</label></td>
+              <td class="w-4/5 pr-6">{{ form.selection_medical_remind_date }}</td>
             </tr>
 
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Date début</label></td>
-              <td class="w-4/5 pr-3">{{ form.starting_date }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Date début</label></td>
+              <td class="w-4/5 pr-6">{{ form.starting_date }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Date fin</label></td>
-              <td class="w-4/5 pr-3">{{ form.ending_date }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Date fin</label></td>
+              <td class="w-4/5 pr-6">{{ form.ending_date }}</td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Créé par</label></td>
-              <td class="w-4/5 pr-3">
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Créé par</label></td>
+              <td class="w-4/5 pr-6">
                 {% if employee %}
                   {% if request.user.is_authenticated %}
                     {{ form.created_by }}
@@ -85,11 +90,11 @@ Création d'un employé
               </td>
             </tr>
             <tr>
-              <td class="w-1/5 p-3 text-left"><label class="text-xl">Créé le</label></td>
-              <td class="w-4/5 pr-3">{{ form.created_at }}</td>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Créé le</label></td>
+              <td class="w-4/5 pr-6">{{ form.created_at }}</td>
             </tr>
             <tr>
-              <td class="pr-3" colspan="2">
+              <td class="pr-6" colspan="2">
                 <button class="my-3 py-4 px-8 text-lg bg-green-500 hover:bg-green-600 text-white" type="submit">Enregistrer</button>
                 <a href="{% url 'employees:index' %}" class="w-32 py-5   px-8 text-lg bg-red-500 hover:bg-red-600  text-white">Annuler</a>
               </td>

@@ -22,7 +22,7 @@ class NewEmployeeForm(forms.ModelForm):
         fields = "__all__"
         exclude = ("created_by",)
 
-    picture = forms.ImageField()
+    picture = forms.ImageField(required=False)
     lastname = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Nom",
                                                              'class': 'w-full py-4 px-6  bg-slate-500 text-slate-100'}))
     firstname = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Prénom",

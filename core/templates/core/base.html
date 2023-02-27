@@ -9,53 +9,32 @@
     <title>{% block title %}{% endblock %} | LCMS Intranet</title>
 </head>
 <body class="bg-slate-800">
-    <nav class="relative container mx-auto">
-<!--        Flex container -->
-        <div class="p-3 flex justify-between items-center mx-auto bg-slate-300">
+    <div class="relative min-h-screen flex">
+        <div class="w-64 bg-slate-900 text-slate-100 space-y-3">
 <!--            logo -->
-            <div>
-                <a href="/" class="text-xl font-semibold">LCMS Intranet<br/>{% block title_head %}{% endblock %}</a>
+            <div class="px-6 py-3">
+                <a href="/" class="text-xl font-semibold">LCMS Intranet<br/><i class="text-sm font-normal">{% block title_head %}{% endblock %}</i></a>
             </div>
-            <!-- MENU -->
-            <!-- Hide the menu for small screen and shows for bigger ones-->
-            <div class="hidden space-x-6 md:flex">
-                <a href="{% url 'core:index' %}" class="p-3 text-md font-semibold bg-slate-200 hover:bg-gray-300
-                border border-slate-400">Accueil</a>
+            <nav class="px-3 space-y-3">
+                <!-- MENU -->
+                <a href="{% url 'core:index' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Accueil</a>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'dashboard' %}" class="p-3 text-md font-semibold bg-slate-200 hover:bg-gray-300
-                border border-slate-400">Tableau de bord</a>
-                    <a href="{% url 'employees:index' %}" class="p-3 text-md font-semibold bg-slate-200 hover:bg-gray-300
-                border border-slate-400">Personnel</a>
-                    <a href="{% url 'core:logout' %}" class="px-6 py-3 text-md font-semibold bg-slate-500
-                    text-white hover:bg-slate-600">Déconnexion</a>
+                    <a href="{% url 'dashboard' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Tableau de bord</a>
+                    <a href="{% url 'employees:index' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>
+                    <a href="{% url 'core:logout' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Déconnexion</a>
                 {% else %}
-                    <a href="{% url 'core:signup' %}" class="px-6 py-3 text-md font-semibold bg-slate-500 text-white hover:bg-slate-700">Inscription</a>
-                    <a href="{% url 'core:login' %}" class="px-6 py-3 text-md font-semibold bg-slate-500 text-white hover:bg-slate-700">Connexion</a>
+                    <a href="{% url 'core:signup' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Inscription</a>
+                    <a href="{% url 'core:login' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Connexion</a>
                 {% endif %}
-            </div>
-<!--            HAMBUEGER MENU -->
-            <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
-                <i class="bi-list" style="font-size: 24px;"></i>
-            </button>
+                <div class="text-center">
+                    <h3 class="text-sm text-slate-400 font-semibold">LCMS Intranet V1.0</h3>
+                </div>
+            </nav>
         </div>
-<!--        MOBILE MENU -->
-        <div class="md:hidden">
-            <div id="menu" class="absolute flex flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold-bg-white
-            sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
-                <a href="#">Accueil</a>
-                <a href="#">Tableau de bord</a>
-                <a href="#">Personnel</a>
-            </div>
+        <div class="flex-1 p-3 bg-slate-800">
+            {% block content %}
+            {% endblock %}
         </div>
-    </nav>
-    <div class="px-6 py-3 bg-slate-800">
-        {% block content %}
-        {% endblock %}
     </div>
-    <footer class="py-6 px-6 bg-slate-900">
-        <div class="text-center">
-            <h3 class="text-sm text-slate-400 font-semibold">LCMS Intranet V1.0</h3>
-        </div>
-    </footer>
 </body>
 </html>

@@ -85,10 +85,6 @@ def employees(request, pk_category):
         'employees': employees,
     })
 
-# def get_user_id(request):
-#     current_user = request.user
-#     return current_user
-
 
 def newEmployee(request):
     if request.method == "POST":

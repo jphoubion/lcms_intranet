@@ -7,8 +7,15 @@ Tableau de bord
 {% block title_head %}
 Tableau de bord
 {% endblock %}
-
+{% block big_title %}
+{% if request.user %}
+{{request.user}} |
+{% endif %}
+    Tableau de bord
+{% endblock %}
 {% block content %}
+
+<div class="m-3">
     <div class="w-1/5 p-3 text-center bg-slate-500 rounded-t-xl">
         <h3 class="text-white font-semibold">Sélections médicales</h3>
     </div>
@@ -32,4 +39,6 @@ Tableau de bord
         <p class="px-3 py-1 text-sm">Tom Machin</p>
 
     </div>
+</div>
+
 {% endblock %}

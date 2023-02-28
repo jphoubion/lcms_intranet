@@ -25,6 +25,7 @@ from employees.views import index as employees_index
 urlpatterns = [
     path('', include('core.urls')),
     path('employees/', include('employees.urls')),
+    path('gesdoc/', include('gesdoc.urls')),
     # path('employees/', employees_index, name="employees"),
     path('dashboard/', dashboard_index, name="dashboard"),
     path('admin/', admin.site.urls),

@@ -9,29 +9,34 @@
     <title>{% block title %}{% endblock %} | LCMS Intranet</title>
 </head>
 <body class="bg-slate-800">
-    <div class="relative min-h-screen flex">
-        <div class="w-64 bg-slate-900 text-slate-100 space-y-3">
+    <div class="relative flex">
+        <div class="w-48 bg-slate-900 text-slate-100 space-y-3 fixed top-0 left-0 min-h-screen">
 <!--            logo -->
-            <div class="px-6 py-3">
+            <div class="px-6 py-3 text-left bg-slate-600">
                 <a href="/" class="text-xl font-semibold">LCMS Intranet<br/><i class="text-sm font-normal">{% block title_head %}{% endblock %}</i></a>
             </div>
             <nav class="px-3 space-y-3">
                 <!-- MENU -->
-                <a href="{% url 'core:index' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Accueil</a>
+                <a href="{% url 'core:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Accueil</a>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'dashboard' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Tableau de bord</a>
-                    <a href="{% url 'employees:index' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>
-                    <a href="{% url 'core:logout' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Déconnexion</a>
+                    <a href="{% url 'dashboard' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Tableau de bord</a>
+                    <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>
+                    <a href="{% url 'gesdoc:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Gestion documentaire</a>
+                    <a href="{% url 'core:logout' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Déconnexion</a>
                 {% else %}
-                    <a href="{% url 'core:signup' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Inscription</a>
-                    <a href="{% url 'core:login' %}" class="block p-3 text-md font-semibold hover:bg-gray-700 rounded transition duration-200">Connexion</a>
+                    <a href="{% url 'core:signup' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Inscription</a>
+                    <a href="{% url 'core:login' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Connexion</a>
                 {% endif %}
-                <div class="text-center">
+                <div class="px-3 text-left">
                     <h3 class="text-sm text-slate-400 font-semibold">LCMS Intranet V1.0</h3>
                 </div>
             </nav>
         </div>
-        <div class="flex-1 p-3 bg-slate-800">
+        <div class="ml-48 flex-1 bg-slate-800">
+            <div class="w-full p-6 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
+                {% block big_title %}
+                {% endblock %}
+            </div>
             {% block content %}
             {% endblock %}
         </div>

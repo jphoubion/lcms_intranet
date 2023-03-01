@@ -13,27 +13,57 @@
         <div class="w-48 bg-slate-900 text-slate-100 space-y-3 fixed top-0 left-0 min-h-screen">
 <!--            logo -->
             <div class="px-6 py-3 text-left bg-slate-600">
-                <a href="/" class="text-xl font-semibold">LCMS Intranet<br/><i class="text-sm font-normal">{% block title_head %}{% endblock %}</i></a>
+                <a href="/" class="text-xl font-semibold">LCMS Intranet</a>
             </div>
+            {% if request.user.is_authenticated %}
+            <div class="text-center italic font-semibold">
+                Utilisateur : {{ request.user }}
+            </div>
+            <hr class="mx-3">
+            {% endif %}
             <nav class="px-3 space-y-3">
                 <!-- MENU -->
-                <a href="{% url 'core:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Accueil</a>
+                <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                    <i class="align-middle bi-house-door text-slate-400" style="font-size: 24px;"></i>
+                    <a href="{% url 'core:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Accueil</a>
+                </div>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'dashboard' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Tableau de bord</a>
-                    <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>
-                    <a href="{% url 'gesdoc:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Gestion documentaire</a>
-                    <a href="{% url 'core:logout' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Déconnexion</a>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-kanban text-slate-400" style="font-size: 24px;"></i>
+                        <a href="{% url 'dashboard' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Tableau de bord</a>
+                    </div>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-people text-slate-400" style="font-size: 24px;"></i>
+                        <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>
+                    </div>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-files text-slate-400" style="font-size: 24px;"></i>
+                        <a href="{% url 'gesdoc:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Gestion documentaire</a>
+                    </div>
+                    <hr>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-pencil-square text-slate-400" style="font-size: 24px;"></i>
+                        <a href="{% url 'core:signup' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Création utilisateur</a>
+                    </div>
+                    <hr>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-door-open text-slate-400" style="font-size: 24px;"></i>
+                        <a href="{% url 'core:logout' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Déconnexion</a>
+                    </div>
                 {% else %}
-                    <a href="{% url 'core:signup' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Inscription</a>
-                    <a href="{% url 'core:login' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Connexion</a>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-box-arrow-in-right text-slate-400" style="font-size: 24px;"></i>
+                        <a href="{% url 'core:login' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Connexion</a>
+                    </div>
                 {% endif %}
+                <hr>
                 <div class="px-3 text-left">
                     <h3 class="text-sm text-slate-400 font-semibold">LCMS Intranet V1.0</h3>
                 </div>
             </nav>
         </div>
         <div class="ml-48 flex-1 bg-slate-800">
-            <div class="w-full p-6 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
+            <div class="w-full p-2.5 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
                 {% block big_title %}
                 {% endblock %}
             </div>

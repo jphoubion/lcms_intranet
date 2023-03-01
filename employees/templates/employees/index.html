@@ -9,9 +9,7 @@ Gestion du personnel
 Gestion du personnel
 {% endblock %}
 {% block big_title %}
-{% if request.user %}
-{{request.user}} |
-{% endif %}
+
     Gestion du personnel
 {% endblock %}
 {% block content %}
@@ -19,18 +17,18 @@ Gestion du personnel
 <div class="m-3">
   <nav class="mb-3">
     <div class="flex flex-row w-full space-x-3 text-slate-100">
-      <a href="{% url 'employees:categories' %}" class="p-3 bg-slate-200 hover:bg-slate-300 text-slate-800">Gérer les catégories d'employés</a>
-      <a href="{% url 'employees:new_employee' %}" class="p-3 bg-slate-200 hover:bg-slate-300  text-slate-800">Ajouter un employé</a>
+      <a href="{% url 'employees:categories' %}" class="py-1 px-3 bg-slate-200 hover:bg-slate-400 transition duration-200 text-slate-800 rounded">Gérer les catégories d'employés</a>
+      <a href="{% url 'employees:new_employee' %}" class="py-1 px-3 bg-slate-200 hover:bg-slate-400 transition duration-200 text-slate-800 rounded">Ajouter un employé</a>
   <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 2</a>-->
   <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 3</a>-->
   <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 4</a>-->
     </div>
   </nav>
-  <div class="table w-full">
+  <div class="table w-full rounded">
     <div class="table-header-group">
       <div class="table-row">
         <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Nom</div>
-        <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Photo</div>
+        <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Photo</div>
         <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Fonction</div>
         <div class="table-cell text-center p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Sél. méd.</div>
         <div class="table-cell text-left p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">A débuté</div>

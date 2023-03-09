@@ -14,7 +14,7 @@ class Companies(models.Model):
         return f"{self.name} {self.type}"
 # TODO: Créer le page de création/... pour les sociétés
 class CategoryEmployees(models.Model):
-    name = models.CharField(max_length=20, default='Administratif', unique=True)
+    name = models.CharField(max_length=30, default='Administratif', unique=True)
 
     class Meta:
         ordering = ('name',)

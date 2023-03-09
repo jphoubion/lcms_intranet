@@ -12,7 +12,7 @@ class Companies(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.type}"
-
+# TODO: Créer le page de création/... pour les sociétés
 class CategoryEmployees(models.Model):
     name = models.CharField(max_length=20, default='Administratif', unique=True)
 

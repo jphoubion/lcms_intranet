@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'htmx.min.js' %}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <title>{% block title %}{% endblock %} | LCMS Intranet</title>
 </head>
@@ -37,7 +38,13 @@
                     </div>
                     <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
                         <i class="bi-people text-slate-400" style="font-size: 24px;"></i>
-                        <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>
+<!--                        <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>-->
+                        <button class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200" hx-push-url="true" hx-get="{% url 'employees:index' %}" hx-target="#mainContent" hx-swap="outerHTML">Personnel</button>
+                    </div>
+                    <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
+                        <i class="bi-people text-slate-400" style="font-size: 24px;"></i>
+<!--                        <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>-->
+                        <button class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200" hx-push-url="true" hx-get="{% url 'employees:companies' %}" hx-target="#mainContent" hx-swap="outerHTML">Sociétés</button>
                     </div>
                     <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
                         <i class="bi-files text-slate-400" style="font-size: 24px;"></i>
@@ -67,13 +74,15 @@
                 </div>
             </nav>
         </div>
-        <div class="ml-48 flex-1 bg-slate-800">
-            <div class="w-full p-2.5 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
+        <div id="mainContent" class="ml-48 flex-1 bg-slate-800">
+            <div class="w-full p-2.5 pr-3 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
                 {% block big_title %}
                 {% endblock %}
             </div>
-            {% block content %}
-            {% endblock %}
+            <div>
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 </body>

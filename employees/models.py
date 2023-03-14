@@ -8,10 +8,10 @@ from django.utils import timezone
 
 class Companies(models.Model):
     name = models.CharField(max_length=40, verbose_name="Nom")
-    type = models.CharField(max_length=10, verbose_name="Forme juridique")
+    legal_form = models.CharField(max_length=10, verbose_name="Forme juridique")
 
     def __str__(self):
-        return f"{self.name} {self.type}"
+        return f"{self.name} {self.legal_form}"
 
 class CategoryEmployees(models.Model):
     name = models.CharField(max_length=20, default='Administratif', unique=True)

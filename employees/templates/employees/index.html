@@ -9,7 +9,6 @@ Gestion du personnel
 Gestion du personnel
 {% endblock %}
 {% block big_title %}
-
     Gestion du personnel
 {% endblock %}
 {% block content %}
@@ -60,7 +59,7 @@ Gestion du personnel
           <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.ending_date|date:'d/m/Y' }}</div>
           <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.created_by.username }}</div>
           <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">{{ employee.created_at|date:'d/m/Y' }}</div>
-          <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700"><a href="{% url 'employees:edit_employee' employee.id %}"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
+          <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700"><button hx-push-url="true" hx-target='#mainContent' hx-swap="outerHTML" hx-get="{% url 'employees:edit_employee' employee.id %}"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></button></div>
           <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700 "><a href="{% url 'employees:delete_employee' employee.id %}"><i class="bi-slash-circle text-red-400" style="font-size: 24px;"></i></a></div>
         </div>
       {% endfor %}

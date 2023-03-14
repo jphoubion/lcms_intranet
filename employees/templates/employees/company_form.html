@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+{% load categorytags %}
+{% block title %}
+  Création d'une société
+{% endblock %}
+
+{% block title_head %}
+  Création d'une société
+{% endblock %}
+{% block big_title %}
+    Création d'une société
+{% endblock %}
+{% block content %}
+<!--<div class="w-full md:w-4/5 my-6 p-6 text-center mx-auto bg-slate-700 text-slate-100 ">-->
+  {% if employee %}
+    <form method="POST" action="{% url 'employees:edit_company' company.id %}">
+  {% else %}
+    <form method="POST" action="{% url 'employees:new_company' %}">
+  {% endif %}
+
+    {% csrf_token %}
+
+      <div>
+        <table class="table-fixed bg-slate-600 w-4/5 mx-auto my-6 p-6 text-slate-100 rounded">
+          <tbody>
+            <tr>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Nom</label></td>
+              <td class="w-4/5 pr-6">{{ form.name }}</td>
+            </tr>
+            <tr>
+              <td class="w-1/5 px-6 py-3 text-left"><label class="text-xl">Forme Juridique</label></td>
+              <td class="w-4/5 pr-6">{{ form.legal_form }}</td>
+            </tr>
+            <tr>
+            <tr>
+              <td class="text-center" colspan="2">
+                  <button class="my-3 py-4 px-8 text-lg bg-green-500 hover:bg-green-600 text-white rounded" type="submit">Enregistrer</button>
+                  <a class="w-32 py-5 px-8 text-lg bg-red-500 hover:bg-red-600 text-white rounded" href="{% url 'employees:companies' %}">Annuler</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {% if form.errors or form.non_field_error %}
+      <div class="mb-3 6 bg-red-100 ">
+        {% for field in form %}
+        {{ field.errors }}
+        {% endfor %}
+
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+    </div>
+  </form>
+<!--</div>-->
+{% endblock %}

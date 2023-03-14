@@ -2,7 +2,20 @@ import datetime
 
 from django import forms
 from django.contrib.auth.models import User
-from .models import CategoryEmployees, Employees, Companies
+from .models import Companies, CategoryEmployees, Employees, Companies
+
+
+class NewCompanyForm(forms.ModelForm):
+    class Meta:
+        model = Companies
+        fields = ('name', 'legal_form')
+
+    name = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': "Nom de la société",
+        'class': 'w-full py-4 px-6  bg-slate-500 text-slate-100'}))
+    legal_form = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': "Forme juridique de la société",
+        'class': 'w-full py-4 px-6  bg-slate-500 text-slate-100'}))
 
 
 class NewCategoryEmployeesForm(forms.ModelForm):

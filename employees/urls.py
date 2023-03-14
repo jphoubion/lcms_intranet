@@ -9,6 +9,11 @@ app_name = 'employees'
 urlpatterns = [
     path('', views.index, name='index'),
 
+    path('companies', views.companies, name='companies'),
+    path('new_company', views.newCompany, name="new_company"),
+    path('edit_company/<int:pk>', views.editCompany, name="edit_company"),
+    path('delete_company/<int:pk>', views.deleteCompany, name="delete_company"),
+
     path('categories', views.categories, name='categories'),
     path('new_category', views.newCategory, name="new_category"),
     path('edit_category/<int:pk>', views.editCategory, name="edit_category"),

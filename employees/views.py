@@ -5,12 +5,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from employees.models import Employees, CategoryEmployees, Companies
-from .forms import NewCategoryEmployeesForm, NewEmployeeForm
+from .forms import NewCompanyForm, NewCategoryEmployeesForm, NewEmployeeForm
 
 
 @login_required
 def index(request):
-    """ Displays each emloyee and its category """
+    """ Displays each employee and its category """
 
     employees = Employees.objects.all()
     category_employee = CategoryEmployees.objects.all()
@@ -18,6 +18,39 @@ def index(request):
         'employees': employees,
         'categories': category_employee,
     })
+
+def companies(request):
+    """ Get all companies """
+    companies = Companies.objects.all()
+    return render(request, 'employees/companies.html', {
+        "companies": companies
+    })
+
+def newCompany(request):
+    """ Creates a new company"""
+    form = NewCompanyForm()
+    if request.method == "POST":
+        form = NewCompanyForm(request.POST)
+        if form.is_valid():
+            print("from valid")
+            form.save()
+            return redirect('/employees/companies')
+        else:
+            print("form is INVALID")
+            print(form.errors.as_data())
+    else:
+        form = NewCompanyForm()
+
+    return render(request, 'employees/company_form.html', {
+        'form': form, })
+
+def editCompany(request, pk):
+    """ edits a company """
+    pass
+
+def deleteCompany(request, pk):
+    """ Deletes a company """
+    pass
 
 def categories(request):
     """" Get all the categories from the DB """
@@ -49,6 +82,7 @@ def newCategory(request):
     return render(request, 'employees/category_form.html', {
         'form': form,})
 
+
 def editCategory(request, pk):
     category = CategoryEmployees.objects.get(pk=pk)
     print(category, category.id )
@@ -66,6 +100,7 @@ def editCategory(request, pk):
         'category': category,
         'form': form, })
 
+
 def deleteCategory(request, pk):
     category = CategoryEmployees.objects.get(pk=pk)
 
@@ -75,7 +110,9 @@ def deleteCategory(request, pk):
     return render(request, 'employees/delete_category_form.html', {
         'category': category, })
 
+
 def employees(request, pk_category):
+    """ Returns the employees of a given category """
     if pk_category is None:
         employees = Employees.objects.all()
     else:

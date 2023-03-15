@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from employees.models import Employees, CategoryEmployees, Companies
 from .forms import NewCompanyForm, NewCategoryEmployeesForm, NewEmployeeForm
 
+# TODO: créer des champs de recherche rapide pour les écrans affichant la liste des employés, catégories, société...
 
 @login_required
 def index(request):

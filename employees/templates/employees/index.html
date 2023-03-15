@@ -17,9 +17,13 @@ Gestion du personnel
     <div class="flex flex-row w-full space-x-3 text-slate-100">
       <a href="{% url 'employees:categories' %}" class="py-1 px-3 bg-slate-200 hover:bg-slate-400 transition duration-200 text-slate-800 rounded">Gérer les catégories d'employés</a>
       <a href="{% url 'employees:new_employee' %}" class="py-1 px-3 bg-slate-200 hover:bg-slate-400 transition duration-200 text-slate-800 rounded">Ajouter un employé</a>
-  <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 2</a>-->
-  <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 3</a>-->
-  <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 4</a>-->
+    </div>
+    <div>
+      <span class="text-lg text-slate-100">Recherche </span>
+      <form hx-target='#mainContent' hx-swap="outerHTML" hx-post="{% url 'employees:new_company' %}">
+        <input type="Name" placeholder="Nom à rechercher">
+        <button type="submit" class="text-slate-100">Chercher</button>
+    </form>
     </div>
   </nav>
   <div class="table w-full ">

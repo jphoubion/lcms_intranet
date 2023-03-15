@@ -10,6 +10,9 @@ class Companies(models.Model):
     name = models.CharField(max_length=40, verbose_name="Nom")
     legal_form = models.CharField(max_length=10, verbose_name="Forme juridique")
 
+    class Meta:
+        ordering = ('name',)
+        verbose_name_plural = 'Companies'
     def __str__(self):
         return f"{self.name} {self.legal_form}"
 

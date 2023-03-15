@@ -9,32 +9,34 @@ Gestion des catégories d'employés
 {% endblock %}
 
 {% block content %}
-<nav class="mb-3">
-  <div class="flex flex-row w-full space-x-3">
-      <a href="{% url 'employees:new_category' %}" class="p-3 bg-slate-200 hover:bg-slate-300">Ajouter</a>
-<!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 2</a>-->
-<!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 3</a>-->
-<!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 4</a>-->
-  </div>
-</nav>
-<div class="table w-full">
-  <div class="table-header-group">
-    <div class="table-row text-center">
-      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Nom</div>
-      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100"># Employés</div>
-      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Modifier</div>
-      <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Supprimer<br></div>
+<div class="m-3">
+  <nav class="mb-3">
+    <div class="flex flex-row w-full space-x-3">
+        <a href="{% url 'employees:new_category' %}" class="py-1 px-3 bg-slate-200 hover:bg-slate-400 transition duration-200 text-slate-800 rounded">Ajouter</a>
+  <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 2</a>-->
+  <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 3</a>-->
+  <!--    <a href="#" class="text-white p-3 hover:bg-slate-400">Item 4</a>-->
     </div>
-  </div>
-  <div class="table-row-group ">
-    {% for category in categories %}
-      <div class="table-row bg-slate-600 hover:bg-slate-500">
-        <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ category.name }}</div>
-        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700">{{ employees|countEmployeesInCategory:category.id }}</div>
-        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700"><a href="{% url 'employees:edit_category' category.id %}"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
-        <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700 "><a href="{% url 'employees:delete_category' category.id %}"><i class="bi-trash text-red-400" style="font-size: 24px;"></i></a></div>
+  </nav>
+  <div class="table w-full">
+    <div class="table-header-group">
+      <div class="table-row text-center">
+        <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Nom</div>
+        <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100"># Employés</div>
+        <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Modifier</div>
+        <div class="table-cell p-3 bg-slate-700 text-white font-semibold border-b border-slate-100">Supprimer<br></div>
       </div>
-    {% endfor %}
     </div>
+    <div class="table-row-group ">
+      {% for category in categories %}
+        <div class="table-row bg-slate-600 hover:bg-slate-500">
+          <div class="table-cell p-3 text-slate-100 text-left border-b border-slate-700">{{ category.name }}</div>
+          <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700">{{ employees|countEmployeesInCategory:category.id }}</div>
+          <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700"><a href="{% url 'employees:edit_category' category.id %}"><i class="bi-pencil-square text-green-400" style="font-size: 24px;"></i></a></div>
+          <div class="table-cell p-3 text-slate-100 text-center border-b border-slate-700 "><a href="{% url 'employees:delete_category' category.id %}"><i class="bi-trash text-red-400" style="font-size: 24px;"></i></a></div>
+        </div>
+      {% endfor %}
+      </div>
+  </div>
 </div>
 {% endblock %}

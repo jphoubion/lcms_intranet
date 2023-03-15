@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load categorytags %}
+
 {% block title %}
   Création d'une société
 {% endblock %}
@@ -12,10 +12,12 @@
 {% endblock %}
 {% block content %}
 <!--<div class="w-full md:w-4/5 my-6 p-6 text-center mx-auto bg-slate-700 text-slate-100 ">-->
-  {% if employee %}
-    <form method="POST" action="{% url 'employees:edit_company' company.id %}">
+  {% if company %}
+<!--    <form method="POST" action="{% url 'employees:edit_company' company.id %}">-->
+    <form hx-target='#mainContent' hx-swap="outerHTML" hx-post="{% url 'employees:edit_company' company.id %}">
   {% else %}
-    <form method="POST" action="{% url 'employees:new_company' %}">
+<!--    <form method="POST" action="{% url 'employees:new_company' %}">-->
+    <form hx-target='#mainContent' hx-swap="outerHTML" hx-post="{% url 'employees:new_company' %}">
   {% endif %}
 
     {% csrf_token %}

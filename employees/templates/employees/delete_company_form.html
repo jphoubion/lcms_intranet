@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load companytags %}
+{% block title %}
+Suppression d'une société - Confirmation
+{% endblock %}
+
+{% block title_head %}
+Suppression d'une société
+{% endblock %}
+
+{% block content %}
+<div class="w-1/2 p-6 text-center mx-auto bg-slate-200 ">
+  <h1 class="mb-6 text-3xl text-slate-700">Suppression d'une société - Confirmation</h1>
+    <form method="POST" action="{% url 'employees:delete_company' company.id %}">
+    {% csrf_token %}
+    <div class="grid grid-cols-2 grid-flex space-x-3">
+      <div class="mb-3 col-span-2 text-xl font-bold">
+        {{ company.name }}
+      </div>
+
+      {% if form.errors or form.non_field_error %}
+      <div class="mb-3 6 bg-red-100 ">
+        {% for field in form %}
+        {{ field.errors }}
+        {% endfor %}
+
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <div class="col-span-2">
+        <H1 class="p-3 text-2xl ">Êtes-vous certain de vouloir supprimer cette société ?</H1>
+      </div>
+      <button class="py-4 px-8 text-lg bg-red-500 hover:bg-slate-300  text-white" type="submit">Oui</button>
+      <a href="{% url 'employees:companies' %}" class="py-4 px-8 text-lg bg-green-500 hover:bg-green-300  text-white">Non</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

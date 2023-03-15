@@ -17,13 +17,11 @@
                 <a href="/" class="text-xl font-semibold">LCMS Intranet</a>
             </div>
             {% if request.user.is_authenticated %}
-            <div class="text-center italic font-semibold">
-                Utilisateur : {{ request.user }} {{ request.user.is_staff }}
-
-                {{request.user.groups }}
-
-            </div>
-            <hr class="mx-3">
+                <div class="text-center italic font-semibold">
+                    Utilisateur : {{ request.user }} {{ request.user.is_staff }}
+                    {{request.user.groups }}
+                </div>
+                <hr class="mx-3">
             {% endif %}
             <nav class="px-3 space-y-3">
                 <!-- MENU -->
@@ -74,16 +72,17 @@
                 </div>
             </nav>
         </div>
-        <div id="mainContent" class="ml-48 flex-1 bg-slate-800">
-            <div class="w-full p-2.5 pr-3 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
-                {% block big_title %}
-                {% endblock %}
-            </div>
-            <div>
-                {% block content %}
-                {% endblock %}
-            </div>
+    </div>
+    <div id="mainContent" class="ml-48 flex-1 bg-slate-800">
+        <div class="w-full p-2.5 pr-3 bg-slate-600 text-slate-100 text-2xl text-right uppercase italic">
+            {% block big_title %}
+            {% endblock %}
+        </div>
+        <div>
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
+
 </body>
 </html>

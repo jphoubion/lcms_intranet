@@ -19,8 +19,9 @@ urlpatterns = [
     path('edit_category/<int:pk>', views.editCategory, name="edit_category"),
     path('delete_category/<int:pk>', views.deleteCategory, name="delete_category"),
 
-    path('employees', views.employees, name="employees"),
-    path('employees_filtered/<int:pk_category>', views.employees, name="employees_filtered"),
+    path('employees', views.employees_on_category_filtered, name="employees"),
+    path('employees_on_category_filtered/<int:pk_category>', views.employees_on_category_filtered, name="employees_on_category_filtered"),
+    path('employees_on_company_filtered/<int:pk_company>', views.employees_on_company_filtered, name="employees_on_company_filtered"),
     path('new_employee', views.newEmployee, name="new_employee"),
     path('edit_employee/<int:pk>', views.editEmployee, name="edit_employee"),
     path('delete_employee/<int:pk>', views.deleteEmployee, name="delete_employee"),

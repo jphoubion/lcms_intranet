@@ -21,9 +21,11 @@ def index(request):
 
 def companies(request):
     """ Get all companies """
+    employees = Employees.objects.all()
     companies = Companies.objects.all()
     return render(request, 'employees/companies.html', {
-        "companies": companies
+        'employees': employees,
+        'companies': companies
     })
 
 def newCompany(request):
@@ -46,11 +48,32 @@ def newCompany(request):
 
 def editCompany(request, pk):
     """ edits a company """
-    pass
+    company = Companies.objects.get(pk=pk)
+    print(company)
+    print(pk)
+    form = NewCompanyForm(request.POST or None, instance=company)
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('/employees/companies')
+        else:
+            print("form is INVALID company")
+            print(form.errors.as_data())
+
+    return render(request, 'employees/company_form.html', {
+        'company': company,
+        'form': form, })
 
 def deleteCompany(request, pk):
     """ Deletes a company """
-    pass
+    company = Companies.objects.get(pk=pk)
+
+    if request.method == "POST":
+        company.delete()
+        return redirect('/employees/companies')
+    return render(request, 'employees/delete_company_form.html', {
+        'company': company, })
 
 def categories(request):
     """" Get all the categories from the DB """
@@ -111,7 +134,7 @@ def deleteCategory(request, pk):
         'category': category, })
 
 
-def employees(request, pk_category):
+def employees_on_category_filtered(request, pk_category):
     """ Returns the employees of a given category """
     if pk_category is None:
         employees = Employees.objects.all()
@@ -122,6 +145,16 @@ def employees(request, pk_category):
         'employees': employees,
     })
 
+def employees_on_company_filtered(request, pk_company):
+    """ Returns employees of the given company """
+    if pk_company is None:
+        employees = Employees.objects.all()
+    else:
+        employees = Employees.objects.filter(company_id=pk_company)
+
+    return render(request, 'employees/index.html', {
+        'employees': employees,
+    })
 
 def newEmployee(request):
     if request.method == "POST":

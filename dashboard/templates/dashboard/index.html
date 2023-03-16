@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load companytags %}
 {% block title %}
 Tableau de bord
 {% endblock %}
@@ -14,29 +14,26 @@ Tableau de bord
 {% block content %}
 
 <div class="m-3">
-    <div class="w-1/5 p-3 text-center bg-slate-500 rounded-t-xl">
-        <h3 class="text-white font-semibold">Sélections médicales</h3>
-    </div>
-    <div class="w-1/5 bg-slate-100">
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm bg-orange-300">Tom Machin</p>
-    </div>
-    <div class="w-1/5 bg-slate-400">
-        <h3 class="p-3 text-white text-center font-semibold">A renouveler bientôt</h3>
-    </div>
-    <div class="w-1/5 bg-slate-100 rounded-b-xl">
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-        <p class="px-3 py-1 text-sm">Tom Machin</p>
-
-    </div>
+    <div class="text-2xl w-1/5 text-center p-3 mb-3 text-slate-100 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded">Situation des sociétés</div>
+    <div class="table rounded">
+        <div class="table-header-group ">
+          <div class="table-row bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900" >
+            <div class="table-cell text-left p-3 text-white font-semibold border-b border-slate-100">Nom</div>
+            <div class="table-cell text-center p-3 text-white font-semibold border-b border-slate-100">Nbr. d'employés</div>
+          </div>
+        </div>
+        <div class="table-row-group p-3 bg-slate-700 text-slate-100">
+        {% for company in companies %}
+            <div class="table-row hover:bg-slate-500 transition duration-800">
+                <div class="table-cell p-3 align-middle text-slate-100 text-left border-b border-slate-700">
+                    {{ company }}
+                </div>
+                <div class="table-cell p-3 align-middle text-slate-100 text-center border-b border-slate-700">
+                    {{ employees|countEmployeesInCompany:company.id }}
+                </div>
+            </div>
+        {% endfor %}
+  </div>
 </div>
 
 {% endblock %}

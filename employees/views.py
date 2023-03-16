@@ -50,8 +50,6 @@ def newCompany(request):
 def editCompany(request, pk):
     """ edits a company """
     company = Companies.objects.get(pk=pk)
-    print(company)
-    print(pk)
     form = NewCompanyForm(request.POST or None, instance=company)
 
     if request.method == "POST":
@@ -109,7 +107,6 @@ def newCategory(request):
 
 def editCategory(request, pk):
     category = CategoryEmployees.objects.get(pk=pk)
-    print(category, category.id )
     form = NewCategoryEmployeesForm(request.POST or None, instance=category)
 
     if request.method == "POST":
@@ -135,7 +132,7 @@ def deleteCategory(request, pk):
         'category': category, })
 
 
-def employees_on_category_filtered(request, pk_category):
+def employeesOnCategoryFiltered(request, pk_category):
     """ Returns the employees of a given category """
     if pk_category is None:
         employees = Employees.objects.all()
@@ -146,12 +143,24 @@ def employees_on_category_filtered(request, pk_category):
         'employees': employees,
     })
 
-def employees_on_company_filtered(request, pk_company):
+def employeesOnCompanyFiltered(request, pk_company):
     """ Returns employees of the given company """
     if pk_company is None:
         employees = Employees.objects.all()
     else:
         employees = Employees.objects.filter(company_id=pk_company)
+
+    return render(request, 'employees/index.html', {
+        'employees': employees,
+    })
+
+def employeesSearchedByName(request):
+    """ Return employees that contains NAME value in their name """
+    employees = Employees.objects.all()
+    if request.GET['lastname'] != '':
+        employees = Employees.objects.filter(lastname__startswith=request.GET['lastname'])
+    if request.GET['firstname'] != '':
+        employees = Employees.objects.filter(firstname__startswith=request.GET['firstname'])
 
     return render(request, 'employees/index.html', {
         'employees': employees,

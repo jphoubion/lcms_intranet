@@ -17,9 +17,13 @@
                 <a href="/" class="text-xl font-semibold">LCMS Intranet</a>
             </div>
             {% if request.user.is_authenticated %}
-                <div class="text-center italic font-semibold">
-                    Utilisateur : {{ request.user }} {{ request.user.is_staff }}
-                    {{request.user.groups }}
+                {% if request.user.is_staff %}
+                    <div class="bg-red-800 text-center italic font-semibold">
+                {% else %}
+                    <div class="text-center italic font-semibold">
+                {% endif %}
+                    Utilisateur : {{ request.user }}
+                    Groupes : <br/>{{request.user.groups }}
                 </div>
                 <hr class="mx-3">
             {% endif %}
@@ -36,17 +40,15 @@
                     </div>
                     <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
                         <i class="bi-people text-slate-400" style="font-size: 24px;"></i>
-<!--                        <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>-->
                         <button class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200" hx-push-url="true" hx-get="{% url 'employees:index' %}" hx-target="#mainContent" hx-swap="outerHTML">Personnel</button>
                     </div>
                     <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
                         <i class="bi-people text-slate-400" style="font-size: 24px;"></i>
-<!--                        <a href="{% url 'employees:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Personnel</a>-->
                         <button class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200" hx-push-url="true" hx-get="{% url 'employees:companies' %}" hx-target="#mainContent" hx-swap="outerHTML">Sociétés</button>
                     </div>
                     <div class="flex px-3 py-1 text-middle hover:bg-gray-700 rounded transition duration-200">
                         <i class="bi-files text-slate-400" style="font-size: 24px;"></i>
-                        <a href="{% url 'gesdoc:index' %}" class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200">Gestion documentaire</a>
+                        <button class="block p-3 text-sm font-semibold hover:bg-gray-700 rounded transition duration-200" hx-push-url="true" hx-get="{% url 'gesdoc:index' %}" hx-target="#mainContent" hx-swap="outerHTML">Gestion documentaire</button>
                     </div>
                     <hr>
                     {% if request.user.is_staff %}

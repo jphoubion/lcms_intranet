@@ -9,73 +9,42 @@ Gestion documentaire
 {% endblock %}
 
 {% block big_title %}
-
     Gestion documentaire
 {% endblock %}
 {% block content %}
-<div class="grid grid-cols-3 gap-3">
-    <a href="#">
-        <div class="m-3 p-6 text-slate-100 text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                </svg>
-            </div>
-            <p class="text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-            </p>
+<div class="m-3">
+    <nav class="mb-3">
+        <div class="flex flex-row w-full space-x-3 text-slate-100">
+            <a href="{% url 'gesdoc:new_document_category' %}"
+               class="py-1 px-3 bg-slate-200 hover:bg-slate-400 transition duration-200 text-slate-800 rounded">Ajouter une catégorie</a>
         </div>
-    </a>
-
-    <div class="m-3 p-6 text-slate-100  text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-        <div>
-            <i class="bi-people text-slate-400" style="font-size: 96px;"></i>
-        </div>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-        </p>
-    </div>
-    <div class="m-3 p-6 text-slate-100  text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-        <div>
-            <i class="bi-people text-slate-400" style="font-size: 96px;"></i>
-        </div>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-        </p>
-    </div>
-    <div class="m-3 p-6 text-slate-100  text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-        <div>
-            <i class="bi-people text-slate-400" style="font-size: 96px;"></i>
-        </div>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-        </p>
-    </div>
-    <div class="m-3 p-6 text-slate-100  text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-        <div>
-            <i class="bi-people text-slate-400" style="font-size: 96px;"></i>
-        </div>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-        </p>
-    </div>
-    <div class="m-3 p-6 text-slate-100  text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-        <div>
-            <i class="bi-people text-slate-400" style="font-size: 96px;"></i>
-        </div>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-        </p>
-    </div>
-    <div class="m-3 p-6 text-slate-100  text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
-        <div>
-            <i class="bi-people text-slate-400" style="font-size: 96px;"></i>
-        </div>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur deleniti ea eius, eos explicabo harum, libero magni minus molestias nostrum nulla omnis placeat recusandae repudiandae rerum ullam voluptas, voluptatem?
-        </p>
-    </div>
+    </nav>
+    <div class="grid grid-cols-3 gap-3">
+        {% for documentCategory in documentCategories %}
+            {% if documenCategory.parent_id %}
+                <a href="{% url 'gesdoc:index_with_parentId' documenCategory.id %}">
+            {% else %}
+                <a href="{% url 'gesdoc:index' %}">
+            {% endif %}
+                <div class="p-6 text-slate-100 text-center h-full hover:bg-slate-900 border border-slate-100 rounded">
+                    <div class="">
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="m-8 mx-auto w-24 h-24">-->
+<!--                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />-->
+<!--                        </svg>-->
+                        <h3 class="m-3 sm:text-sm md:text-lg lg:text-2xl xl:text-4xl font-semibold text-white">{{ documentCategory.name }}</h3>
+                    </div>
+                    <p class="text-center sm:text-sm md:text-lg text-slate-100">
+                            {{ documentCategory.description }}
+                    </p>
+                    <p>Catégorie parente : {{ documenCategory.parent_id }}</p>
+                </div>
+            </a>
+        {% endfor %}
 
 
+    </div>
 </div>
+
+
+
 {% endblock %}

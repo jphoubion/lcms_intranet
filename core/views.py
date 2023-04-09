@@ -11,10 +11,10 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/login/')
-        # else:
-        #     print("form is INVALID")
-        #     print(form.errors.as_data())
+            return redirect('/')
+        else:
+            print("form is INVALID")
+            print(form.errors.as_data())
     else:
         form = SignupForm()
 
